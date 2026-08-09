@@ -1,12 +1,10 @@
 import yfinance as yf
-
 def get_financial_data(ticker_symbol):
-    ticker = yf.Ticker(ticker_symbol)
-
-    income = ticker.financials
-    balance = ticker.balance_sheet
-    cashflow = ticker.cashflow
-    info = ticker.info
+    t = yf.Ticker(ticker_symbol)
+    income = t.financials
+    balance = t.balance_sheet
+    cashflow = t.cashflow
+    info = t.info
 
     def safe_get(df, key):
         try:

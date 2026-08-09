@@ -1,12 +1,12 @@
 from data_fetcher import get_financial_data
-from analyzer import calculate_extra_metrics, apply_full_rules, summarize
+from analyzer import calculate_extra_metrics, calculate_16_metrics
 
 def analyze_stock(ticker):
     data = get_financial_data(ticker)
     extra = calculate_extra_metrics(data)
-    results = apply_full_rules(data, extra)
-    summary = summarize(results)
-    return {"ticker": ticker, "score": summary["passed"], "total": summary["total"], "pass": summary["pass_threshold"]}
+    metrics = calculate_16_metrics(data, extra)
+    score = sum(metrics.values())
+    return {"ticker": ticker, "score": score, "detail": metrics}
 
 def analyze_multiple(tickers):
     results = []
